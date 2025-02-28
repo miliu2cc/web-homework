@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>青春不常在，抓紧谈恋爱</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 40px;
+        }
+        .form-section {
+            flex: 2;
+        }
+        .pledge-section {
+            flex: 1;
+            border: 2px solid #ff7f7f;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff0f0;
+        }
+        h1 {
+            text-align: center;
+            color: #ff4d4d;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+        .checkbox-group {
+            flex-wrap: wrap;
+        }
+        button {
+            background: #ff4d4d;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        a {
+            color: #ff4d4d;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>青春不常在，抓紧谈恋爱</h1>
+    <div class="container">
+        <div class="form-section">
+            <form id="registrationForm">
+                <!-- 性别 -->
+                <div class="form-group">
+                    <label>性别</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="male" required> 男</label>
+                        <label><input type="radio" name="gender" value="female"> 女</label>
+                    </div>
+                </div>
+
+                <!-- 生日 -->
+                <div class="form-group">
+                    <label>生日</label>
+                    <div class="radio-group" id="birthdayGroup">
+                        <select id="year" required></select>
+                        <select id="month" required></select>
+                        <select id="day" required></select>
+                    </div>
+                </div>
+
+                <!-- 所在地区 -->
+                <div class="form-group">
+                    <label>所在地区</label>
+                    <input rows="4" required></input>
+                </div>
+
+                <!-- 婚姻状况 -->
+                <div class="form-group">
+                    <label>婚姻状况</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="marriage" value="unmarried" required> 未婚</label>
+                        <label><input type="radio" name="marriage" value="married"> 已婚</label>
+                        <label><input type="radio" name="marriage" value="divorced"> 离婚</label>
+                    </div>
+                </div>
+
+                <!-- 学历 -->
+                <div class="form-group">
+                    <label>学历</label>
+                    <input rows="4" required></input>
+                </div>
+
+                <!-- 喜欢的类型 -->
+                <div class="form-group">
+                    <label>喜欢的类型</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="charming"> 妩媚的</label>
+                        <label><input type="checkbox" value="cute"> 可爱的</label>
+                        <label><input type="checkbox" value="young"> 小鲜肉</label>
+                        <label><input type="checkbox" value="mature"> 老腊肉</label>
+                        <label><input type="checkbox" value="all"> 都喜欢</label>
+                    </div>
+                </div>
+
+                <!-- 自我介绍 -->
+                <div class="form-group">
+                    <label>自我介绍</label>
+                    <textarea rows="4" required></textarea>
+                </div>
+
+                <!-- 注册条款 -->
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="terms" required> 我同意注册条款和会员加入标准
+                    </label>
+                </div>
+
+                <button type="submit">免费注册</button>
+                <a href="#">我是会员，立即登录</a>
+            </form>
+        </div>
+
+        <!-- 承诺部分 -->
+        <div class="pledge-section">
+            <h3>我承诺</h3>
+            <ul>
+                <li>年满18岁，单身</li>
+                <li>抱着严肃的态度</li>
+                <li>真诚寻找另一半</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 动态生成年份（1900-当前年份-18）
+        const currentYear = new Date().getFullYear();
+        const yearSelect = document.getElementById('year');
+        for (let y = currentYear - 100; y <= currentYear - 18; y++) {
+            yearSelect.innerHTML += `<option value="${y}">${y}年</option>`;
+        }
+
+        // 生成月份
+        const monthSelect = document.getElementById('month');
+        for (let m = 1; m <= 12; m++) {
+            monthSelect.innerHTML += `<option value="${m}">${m}月</option>`;
+        }
+
+        // 生成日期
+        const daySelect = document.getElementById('day');
+        for (let d = 1; d <= 31; d++) {
+            daySelect.innerHTML += `<option value="${d}">${d}日</option>`;
+        }
+
+        // 表单验证
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 检查年龄是否满18岁
+            const selectedYear = parseInt(yearSelect.value);
+            if (currentYear - selectedYear < 18) {
+                alert('未满18岁不能注册！');
+                return;
+            }
+
+            // 检查必填项
+            if (!document.querySelector('input[name="gender"]:checked')) {
+                alert('请选择性别');
+                return;
+            }
+
+            alert('注册成功！');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
