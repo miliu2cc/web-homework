@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算公约数</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>计算公约数</h1>
+    <label for="numberInput">请输入一个整数：</label>
+    <input type="number" id="numberInput" placeholder="输入整数">
+    <button onclick="calculateGCD()">计算公约数</button>
+
+    <script>
+        function calculateGCD() {
+            // 获取用户输入的整数
+            const number = parseInt(document.getElementById('numberInput').value);
+
+            // 检查输入是否有效
+            if (isNaN(number) || number <= 1) {
+                alert("请输入一个有效的正整数！");
+                return;
+            }
+            // 计算质因数
+            const factors = getPrimeFactors(number);
+
+            // 生成质因数相乘的算式
+            const equation = factors.join(' * ');
+
+            // 弹出结果
+            alert(`质因数是：${factors.join(', ')}\n质因数相乘的算式：${equation} = ${number}`);
+        }
+
+        function getPrimeFactors(n) {
+            const factors = [];
+            let divisor = 2; // 从最小的质数开始
+
+            while (n >= 2) {
+                if (n % divisor === 0) {
+                    factors.push(divisor); // 将质因数加入数组
+                    n = n / divisor; // 更新n的值
+                } else {
+                    divisor++; // 尝试下一个数
+                }
+            }
+
+            return factors;
+        }
+        
+
+
+    </script>
+
+</body>
+</html>
