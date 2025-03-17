@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单验证</title>
+    <style>
+        .error { color: red; }
+    </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // 阻止表单提交
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const emailRegex = /^a-zA-Z0-9._-+@a-zA-Z0-9.-+\.a-zA-Z{2,6}$/;
+            let isValid = true;
+
+            document.querySelectorAll(".error").forEach(el => el.remove());
+
+            if (username.length < 3) {
+                showError("username", "用户名必须至少3个字符！");
+                isValid = false;
+            }
+            if (password.length < 6) {
+                showError("password", "密码必须至少6个字符！");
+                isValid = false;
+            }
+            if (!emailRegex.test(email)) {
+                showError("email", "请输入有效的邮箱！");
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("注册成功！");
+            }
+        }
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const error = document.createElement("div");
+            error.className = "error";
+            error.innerText = message;
+            field.parentNode.insertBefore(error, field.nextSibling);
+        }
+    </script>
+</head>
+<body>
+    <h1>用户注册</h1>
+    <form onsubmit="validateForm(event)">
+        用户名：<input type="text" id="username" required><br>
+        邮箱：<input type="text" id="email" required><br>
+        密码：<input type="password" id="password" required><br>
+        <button type="submit">提交</button>
+    </form>
+</body>
+</html>

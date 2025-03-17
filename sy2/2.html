@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+    <style>
+        button { font-size: 18px; padding: 10px 20px; }
+    </style>
+    <script>
+        let count = 5;
+
+        function updateCount() {
+            document.getElementById("count").textContent = count;
+        }
+
+        function increment() {
+            count++;
+            updateCount();
+        }
+
+        function decrement() {
+            count--;
+            updateCount();
+        }
+    </script>
+</head>
+<body>
+    <h1>计数器</h1>
+    <p>当前值：<span id="count">5</span></p >
+    <button onclick="increment()">增加</button>
+    <button onclick="decrement()">减少</button>
+</body>
+</html>

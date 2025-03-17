@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易猜数字游戏</title>
+    <script>
+        let targetNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            const guessInput = document.getElementById("guessInput");
+            const result = document.getElementById("result");
+            const guess = parseInt(guessInput.value);
+
+            if (isNaN(guess)) {
+                result.textContent = "请输入一个有效的数字！";
+                return;
+            }
+
+            if (guess < targetNumber) {
+                result.textContent = "太小了！再试一次。";
+            } else if (guess > targetNumber) {
+                result.textContent = "太大了！再试一次。";
+            } else {
+                result.textContent = `恭喜你，猜对了！数字是 ${targetNumber}。`;
+                guessInput.disabled = true; // 禁用输入框
+            }
+
+            guessInput.value = ""; // 清空输入框
+        }
+    </script>
+</head>
+<body>
+    <h1>猜数字游戏（1-100）</h1>
+    <p>猜一个1到100之间的数字：</p >
+    <input type="number" id="guessInput" placeholder="输入数字">
+    <button onclick="checkGuess()">提交</button>
+    <p id="result"></p >
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟</title>
+    <style>
+        clock { font-size: 3em; font-family: Arial, sans-serif; }
+    </style>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString(); // 自动适配本地时间格式
+            document.getElementById("clock").textContent = timeString;
+        }
+
+        window.onload = () => {
+            setInterval(updateClock, 1000);
+            updateClock(); // 页面加载时立即更新
+        };
+    </script>
+</head>
+<body>
+    <h1>当前时间</h1>
+    <p id="clock"></p >
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        taskList { list-style: none; padding: 0; }
+        taskList li { margin: 5px 0; display: flex; justify-content: space-between; }
+        button { margin-left: 10px; }
+    </style>
+    <script>
+        let tasks = ;
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskText = taskInput.value.trim();
+            if (!taskText) {
+                alert("请输入任务内容！");
+                return;
+            }
+
+            tasks.push(taskText);
+            taskInput.value = "";
+            updateTaskList();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            updateTaskList();
+        }
+
+        function updateTaskList() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = ""; // 清空列表
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement("li");
+                li.textContent = task;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "删除";
+                deleteButton.onclick = () => deleteTask(index);
+
+                li.appendChild(deleteButton);
+                taskList.appendChild(li);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <input type="text" id="taskInput" placeholder="输入任务">
+    <button onclick="addTask()">添加任务</button>
+    <ul id="taskList"></ul>
+</body>
+</html>
