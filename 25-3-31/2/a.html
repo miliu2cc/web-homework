@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色选择器</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .color-picker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select {
+            padding: 8px 15px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #color-text {
+            font-size: 24px;
+            margin-top: 20px;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="color-picker">
+        <select id="color-select">
+            <option value="red">红色</option>
+            <option value="yellow">黄色</option>
+            <option value="blue">蓝色</option>
+        </select>
+        <button onclick="changeColor()">确定</button>
+    </div>
+
+    <div id="color-text">选中的颜色将在这里显示</div>
+
+    <script>
+        function changeColor() {
+            // 获取选中的颜色值
+            const select = document.getElementById("color-select");
+            const selectedColor = select.value;
+            
+            // 改变文字颜色
+            const text = document.getElementById("color-text");
+            text.style.color = selectedColor;
+            
+            // 更新文字内容（可选）
+            text.textContent = `当前颜色：${select.options[select.selectedIndex].text}`;
+        }
+    </script>
+
+</body>
+</html>
